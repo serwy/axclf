@@ -15,10 +15,11 @@ Author: Roger D. Serwy
 """
 
 import matplotlib.pyplot as plt
+from ._version import __version__
 
-__all__ = ['axclf', 'axrestore']
 
-__version__ = '0.1.0'
+__all__ = ['axclf', 'axrestore', '__version__']
+
 
 def axclf():
     """Save the active figure's axes limits and clear the figure"""

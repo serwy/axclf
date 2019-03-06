@@ -19,13 +19,14 @@ ion()
 
 ## interactive cell
 figure(1)
-axclf()
+axclf()  # save axes limits and clear figure
 
 ex = 6  # adjust this number when re-running, (CTRL+Plus in IdleX)
 
 x = linspace(0, 10, 1000)
 y = sin(x) ** ex
 plot(x, y)
-axrestore()
+
+axrestore()  # restore axes limits
 
 ```
