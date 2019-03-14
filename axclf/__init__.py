@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from ._version import __version__
 
 
-__all__ = ['axclf', 'axrestore', '__version__']
+__all__ = ['axclf', 'axrestore', 'AutoClean', '__version__']
 
 
 def axclf():
@@ -33,6 +33,7 @@ def axclf():
     f.__axclf = limits
     f.clear()
 
+
 def axrestore():
     """Restore the axes x and y limits"""
     f = plt.gcf()
@@ -43,3 +44,30 @@ def axrestore():
     for ax, (x,y) in zip(axes, restore):
         ax.set_xlim(x)
         ax.set_ylim(y)
+
+
+class AutoClean:
+    """Call a clean-up function when the object
+       is garbage collected.
+
+       ## Cell
+       ac = AutoClean()
+
+       @ac
+       def cleanup():
+           # when `ac` is re-bound when re-executed
+           print('cleaning up')
+    """
+    def __init__(self):
+        self._clean = lambda: None
+
+    def __call__(self, func):
+        self._clean = func
+
+    def __del__(self):
+        self._clean()
+
+    def clean(self):
+        """Execute the clean-up callback and then clears it"""
+        func, self._clean = self._clean, lambda: None
+        func()
