@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from ._version import __version__
 
 
-__all__ = ['axclf', 'axrestore', 'AutoClean', '__version__']
+__all__ = ['axclf', 'axrestore', 'AutoClean', 'find']
 
 
 def axclf(f=None):
@@ -75,3 +75,11 @@ class AutoClean:
         """Execute the clean-up callback and then clears it"""
         func, self._clean = self._clean, lambda: None
         func()
+
+
+def find(x):
+    # matplotlib deprecated `find` in version 2.2
+    # and removed in 3.1.
+    # see: https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.1.0.html#pylab-removals
+    return np.nonzero(np.ravel(x))[0]
+
