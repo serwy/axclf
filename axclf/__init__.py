@@ -16,7 +16,7 @@ Author: Roger D. Serwy
 
 import matplotlib.pyplot as plt
 from ._version import __version__
-
+import numpy as np
 
 __all__ = ['axclf', 'axrestore', 'AutoClean', 'find']
 
